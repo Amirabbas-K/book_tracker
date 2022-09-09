@@ -1,0 +1,6 @@
+.venv/
+.idea/
+__pycache__/
+static/media/author/*.*
+static/media/book_cover/*.*
+password.py

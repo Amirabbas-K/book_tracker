@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View book</title>
+    <link rel="stylesheet" href="{{url_for('static',filename = 'view_book.css')}}">
+</head>
+<body>
+    <section>
+        <h3 id="bookName">{{book[0]}}</h3>
+        <small id="authorName">{{book[1]}}</small>
+    </section>
+
+    {% if book[2] != "" %}
+        <img id="bookCover" src="{{url_for('static',filename = 'media/book_cover/')}}{{book[2]}}">
+    {% endif %}
+    <p>Language is {{book[3]}} </p>
+    {% if book[4] != 1 %}
+        <p> books is translated </p>
+    {% else  %}
+        <p> books is not translated </p>
+    {% endif %}
+    <p> full pages : {{book[5]}}</p>
+    <p> pages i read : {{book[6]}}</p>
+    <p> rate : {{book[7]}}/10</p>
+    <p> my review : <br> {{book[8]}}</p>
+</body>
+</html>

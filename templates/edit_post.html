@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit your Book</title>
+</head>
+<body>
+    <form enctype="multipart/form-data"  method="post" >
+        <label for="bookName">Book name:</label>
+        <input type="text" name="bookName" id="bookName" required value="{{book[0]}}">
+        <br>
+        <!-- TODO: Make the author reserve by name !-->
+        <label for="authorName">Author id:</label>
+        <input type="number" min="0" name="authorName" id="authorName" required value="{{book[1]}}">
+        <br>
+        <label for="coverImage">Select book cover</label>
+        <input type="file" id="coverImage" name="CoverImage" value="{{book[2]}}" >
+        <br>
+        <!-- TODO: Make the auto check by name !-->
+        <label for="langFa">Persian</label>
+        <input type="radio" name="lang" id="langFa" value="Fa">
+        <label for="langEn">English</label>
+        <input type="radio" id="langEn" name="lang" value="En">
+        <br>
+        <label for="isTranslated1">Translated</label>
+        <input type="radio" name="isTranslated" id="isTranslated1" value="0">
+        <label for="isTranslated2">Not translated</label>
+        <input type="radio" id="isTranslated2" name="isTranslated" value="1">
+        <br>
+        <label for="pages">Pages:</label>
+        <input type="number" id="pages" name="pages" min="0" value="{{book[5]}}">
+        <br>
+        <label for="pagesRead">Pages read:</label>
+        <input type="number" id="pagesRead" name="pagesRead" value="{{book[6]}}">
+        <br>
+        <label for="rate">rate:</label>
+        <input type="number" min="1" max="10" step="1" id="rate" name="rate" value="{{book[7]}}">
+        <br>
+        <label for="fullReview">Your full review:</label>
+        <textarea  name="fullReview" id="fullReview">{{book[8]}}</textarea>
+        <br>
+      <input type="submit" value="Submit">
+    </form>
+    {% if status == "true" %}
+        <b> Book updated </b>
+    {%endif%}
+</body>
+</html>

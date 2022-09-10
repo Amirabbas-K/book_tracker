@@ -11,8 +11,6 @@ db = mysql.connector.connect(
 cursor = db.cursor("SHOW TABLES")
 
 # insert
-
-
 def insert_author(name, picture_path):
     query = f"INSERT INTO author (name,picture_path) VALUES ('{name}','{picture_path}')"
     cursor.execute(query)
@@ -59,3 +57,12 @@ def delete(table_name, id_number):
     query = f"DELETE FROM {table_name} WHERE (id = {id_number})"
     cursor.execute(query)
     db.commit()
+
+
+#main_page_fetch
+def main_page():
+    query = "select books.name , author.name , books.cover_image , books.lang, books.is_translated , books.pages \
+    , books.pages_read , books.rate, books.full_review ,books.id from books join author where books.author_id = author.id ;"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result

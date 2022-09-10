@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Book tracker</title>
+    <link rel="stylesheet" href="{{url_for('static',filename = 'main_page.css')}}">
+    <!--    bootstrap files-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
-    Hi i am very happy to see you here
+    <!--   Navbar  -->
+    <nav id="navbar" class="navbar navbar-expand-md " >
+        <div class="container">
+            <div class="navbar-brand">
+                <a id="logo_place" href="#">
+                    <i class="bi bi-book"></i>
+                    <span id="logoText">Your library</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" data-bs-toggle="collapse" type="button" data-bs-target="#nav_item_holder">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="nav_item_holder" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Authors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Quotes</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse">
+               <form class=" ms-auto d-flex " role="search">
+                  <input id="searchBox" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Text    -->
+    {% for book in books %}
+    <div class="container-fluid">
+        <div class="row ms-auto p-1">
+            <div class="col-2">
+                <img id="bookCover" src="{{url_for('static',filename = 'media/book_cover/')}}{{book[2]}}" width="100%" height="100%">
+            </div>
+            <div class="col-10">
+                <a href="{{ url_for('view_book',book_id=book[9])}}">{{book[0]}}</a>
+                <br>
+                <small>{{book[1]}}</small>
+                <br>
+                <span>Rate: {{book[7]}}/10</span>
+                <br>
+                <span>Pages : {{book[5]}} </span><br>
+                <span>Pages Read: {{book[6]}} </span>
+                <p>
+                    {{book[8]}}
+                </p>
+
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

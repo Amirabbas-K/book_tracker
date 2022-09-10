@@ -9,7 +9,13 @@ app = Flask(__name__, static_url_path='/static')
 
 @app.route("/")
 def main_page():
-    return render_template("main_page.html")
+    # TODO:search books
+    books_data = db_operator.main_page()
+    books = []
+    for i in books_data:
+        books.append(list(i))
+    print(books)
+    return render_template("main_page.html" , books=books)
 
 
 @app.route("/add_book", methods=['GET', 'POST'])
@@ -50,7 +56,6 @@ def edit_book(book_id):
     else:
         return render_template("edit_post.html", book=book_data)
 
-# TODO:list on the main page
 
 if __name__ == "__main__":
     app.run()

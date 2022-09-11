@@ -1,46 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add your Book</title>
-</head>
-<body>
-    <form enctype="multipart/form-data"  method="post" >
+{% extends "basic.html" %}
+{% block body %}
+    <form enctype="multipart/form-data" class="p-1 form-group"  method="post" >
         <label for="bookName">Book name:</label>
-        <input type="text" name="bookName" id="bookName" required>
+        <input class="form-control" type="text" name="bookName" id="bookName" required >
         <br>
+        <!-- TODO: Make the author reserve by name !-->
         <label for="authorName">Author id:</label>
-        <input type="number" min="0" name="authorName" id="authorName" required>
+        <input class="form-control" type="number" min="0" name="authorName" id="authorName" required >
         <br>
-        <label for="coverImage">Select book cover</label>
-        <input type="file" id="coverImage" name="CoverImage" >
+            <input class="form-file-input" type="file" id="coverImage" name="CoverImage"  >
+            <label class="form-file-label" for="coverImage">Select book cover</label>
         <br>
-        <label for="langFa">Persian</label>
-        <input type="radio" name="lang" id="langFa" value="Fa">
-        <label for="langEn">English</label>
-        <input type="radio" id="langEn" name="lang" value="En">
+        <!-- TODO: Make the auto check by name !-->
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="lang" id="langFa" value="Fa">
+            <label class="form-check-label" for="langFa">Persian</label>
+        </div>
+        <div class="form-check-inline">
+            <input class="form-check-input"  type="radio" id="langEn" name="lang" value="En">
+            <label class="form-check-label" for="langEn">English</label>
+            <br>
+        </div>
         <br>
-        <label for="isTranslated1">Translated</label>
-        <input type="radio" name="isTranslated" id="isTranslated1" value="0">
-        <label for="isTranslated2">Not translated</label>
-        <input type="radio" id="isTranslated2" name="isTranslated" value="1">
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="isTranslated" id="isTranslated1" value="0">
+            <label class="form-check-label" for="isTranslated1">Not translated</label>
+        </div>
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="isTranslated2" name="isTranslated" value="1">
+            <label class="form-check-label" for="isTranslated2">Translated</label>
+        </div>
         <br>
+
         <label for="pages">Pages:</label>
-        <input type="number" id="pages" name="pages" min="0">
+        <input class="form-control" type="number" id="pages" name="pages" min="0">
         <br>
         <label for="pagesRead">Pages read:</label>
-        <input type="number" id="pagesRead" name="pagesRead" value="0">
+        <input class="form-control" type="number" id="pagesRead" name="pagesRead" >
         <br>
         <label for="rate">rate:</label>
-        <input type="number" min="1" max="10" step="1" id="rate" name="rate">
+        <input class="form-control" type="number" min="1" max="10" step="1" id="rate" name="rate" >
         <br>
         <label for="fullReview">Your full review:</label>
-        <textarea name="fullReview" id="fullReview"></textarea>
+        <textarea class="form-control"  name="fullReview" id="fullReview"></textarea>
         <br>
-      <input type="submit" value="Submit">
+      <input class="btn btn-primary" type="submit" value="Submit">
     </form>
     {% if status == "true" %}
-        <b> Book added </b>
+    <div class="toast fade show m-1" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Book Tracker</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Book added
+      </div>
+    </div>
     {%endif%}
-</body>
-</html>
+
+{% endblock %}

@@ -7,15 +7,13 @@ from os import remove,path
 app = Flask(__name__, static_url_path='/static')
 
 
-@app.route("/")
+@app.route("/" , methods=["GET"])
 def main_page():
-    # TODO:search books
-    books_data = db_operator.main_page()
-    books = []
-    for i in books_data:
-        books.append(list(i))
-    print(books)
-    return render_template("main_page.html" , books=books)
+        books_data = db_operator.main_page()
+        books = []
+        for i in books_data:
+            books.append(list(i))
+        return render_template("main_page.html", books=books)
 
 
 @app.route("/add_book", methods=['GET', 'POST'])
@@ -56,6 +54,15 @@ def edit_book(book_id):
     else:
         return render_template("edit_post.html", book=book_data)
 
+
+# TODO: complete search function
+@app.route('/search',methods=["POST"])
+def search():
+    if request.method == "POST":
+        search = request.form['searched']
+        return render_template("search.html" , search = search)
+    else:
+        return redirect(url_for('main_page'))
 
 if __name__ == "__main__":
     app.run()

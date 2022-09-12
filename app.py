@@ -10,10 +10,7 @@ app = Flask(__name__, static_url_path='/static')
 @app.route("/" , methods=["GET"])
 def main_page():
         books_data = db_operator.main_page()
-        books = []
-        for i in books_data:
-            books.append(list(i))
-        return render_template("main_page.html", books=books)
+        return render_template("main_page.html", books=books_data)
 
 
 @app.route("/add_book", methods=['GET', 'POST'])
@@ -34,7 +31,8 @@ def add_book():
 def view_book(book_id):
     book_data = db_operator.book_view(book_id)
     book_data = list(book_data[0])
-    return render_template("view_book.html", book=book_data)
+    quotes = db_operator.get_quotes(book_id)
+    return render_template("view_book.html", book=book_data, quotes=quotes)
 
 
 @app.route('/edit_book/<book_id>', methods=["GET", "POST"])

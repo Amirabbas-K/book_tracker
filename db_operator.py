@@ -66,3 +66,9 @@ def main_page():
     cursor.execute(query)
     result = cursor.fetchall()
     return result
+
+def get_quotes(book_id):
+    query = f"SELECT * FROM quotes WHERE book_id={book_id} ORDER BY page_from"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result

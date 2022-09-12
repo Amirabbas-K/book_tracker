@@ -25,7 +25,14 @@
             </div>
         </div>
         <div class="row p-3">
-<!--            TODO:Quotes-->
+            {% for quote in quotes %}
+            <div class="card m-1" style="width: 18rem;">
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Page : {{quote[3]}}</h6>
+                <p class="card-text">{{quote[1]}}</p>
+              </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 

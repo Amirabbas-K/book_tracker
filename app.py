@@ -29,16 +29,14 @@ def add_book():
 
 @app.route('/view_book/<book_id>', methods=['GET'])
 def view_book(book_id):
-    book_data = db_operator.book_view(book_id)
-    book_data = list(book_data[0])
-    quotes = db_operator.get_quotes(book_id)
+    book_data = db_operator.book_view(book_id)[0]
+    quotes = db_operator.get_quote(book_id)
     return render_template("view_book.html", book=book_data, quotes=quotes)
 
 
 @app.route('/edit_book/<book_id>', methods=["GET", "POST"])
 def edit_book(book_id):
-    book_data = db_operator.book_view(book_id)
-    book_data = list(book_data[0])
+    book_data = db_operator.book_view(book_id)[0]
     if request.method == "POST":
         if path.isfile(f"static/media/book_cover/{book_data[2]}"):
             remove(f"static/media/book_cover/{book_data[2]}")
@@ -64,14 +62,17 @@ def search():
 
 @app.route('/add_quote/<book_id>',methods=["GET","POST"])
 def add_quote(book_id):
-    book_data = db_operator.book_view(book_id)
-    book_data = list(book_data[0])
+    book_data = db_operator.book_view(book_id)[0]
     if request.method == "POST":
         db_operator.insert_quote(request.form['quoteBody'],book_id,request.form['pageFrom'])
         return render_template("add_quote.html", status="true", book_name=book_data)
     else:
         return render_template("add_quote.html", status="not send",book_name=book_data)
 
+@app.route('/view_quotes',methods=["GET"])
+def view_quotes():
+    quotes = db_operator.get_quotes()
+    return render_template("view_quotes.html",quotes=quotes)
 
 if __name__ == "__main__":
     app.run()

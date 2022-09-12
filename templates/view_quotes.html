@@ -1,0 +1,19 @@
+{% extends "basic.html" %}
+{% block title %}Quotes{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    {% for quote in quotes %}
+    <div class="col-3">
+            <div class="card m-1" style="width: 18rem;">
+              <div class="card-body">
+                <a href="{{ url_for('view_book',book_id=quote[0])}}" style="text-decoration: none; color: #181818" class="h4 card-title mb-2">{{quote[2]}}</a>
+                <p class="card-text">{{quote[1]}}</p>
+              </div>
+            </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

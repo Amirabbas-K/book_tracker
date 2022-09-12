@@ -27,16 +27,16 @@ def insert_book(name, author_id, cover_image, lang, is_translated, pages, pages_
 
 
 def insert_quote(body, book_id, page_from):
-    query = f"INSERT INTO quotes (body,book_id,page_from) VALUES ('{body}',{book_id},{page_from})"
+    query = f'''INSERT INTO quotes (body,book_id,page_from) VALUES ("{body}",{book_id},{page_from})'''
     cursor.execute(query)
     db.commit()
 
 
 # select
 def book_view(book_id):
-    query = f"select books.name , author.name, books.cover_image,books.lang , books.is_translated,books.pages,\
+    query = f'select books.name , author.name, books.cover_image,books.lang , books.is_translated,books.pages,\
     books.pages_read,books.rate,books.full_review from books left join author on books.author_id = author.id\
-    where books.id = {book_id}"
+    where books.id = {book_id}'
     cursor.execute(query)
     result = cursor.fetchall()
     return result

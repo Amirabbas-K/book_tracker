@@ -64,5 +64,16 @@ def search():
     else:
         return redirect(url_for('main_page'))
 
+@app.route('/add_quote/<book_id>',methods=["GET","POST"])
+def add_quote(book_id):
+    book_data = db_operator.book_view(book_id)
+    book_data = list(book_data[0])
+    if request.method == "POST":
+        db_operator.insert_quote(request.form['quoteBody'],book_id,request.form['pageFrom'])
+        return render_template("add_quote.html", status="true", book_name=book_data)
+    else:
+        return render_template("add_quote.html", status="not send",book_name=book_data)
+
+
 if __name__ == "__main__":
     app.run()

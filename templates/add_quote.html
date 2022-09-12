@@ -1,0 +1,25 @@
+{% extends "basic.html" %}
+{% block quote %}
+Add your favorite quotes
+{% endblock %}
+{% block body %}
+    <h3>{{book_name[0]}}</h3>
+    <form method="post" class="p-1 form-group" >
+        <label for="quoteBody">Quote text :</label>
+        <input class="form-control" id="quoteBody" type="text" name="quoteBody">
+        <label class="mb-3" for="pageFrom">Page number:</label>
+        <input class="form-control" id="pageFrom" type="number" name="pageFrom" min="0" step="1">
+        <input type="submit" class="btn btn-outline-success mt-2">
+    </form>
+    {% if status == "true" %}
+    <div class="toast fade show m-1" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Book Tracker</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+        <div class="toast-body">
+            Quote added
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

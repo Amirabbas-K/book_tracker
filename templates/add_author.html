@@ -1,0 +1,24 @@
+{% extends "basic.html" %}
+{% block author %}Add Author{% endblock %}
+{% block body %}
+<div class="container">
+  <form enctype="multipart/form-data" class="form-group p-1" method="post">
+    <label for="authorName">Author name </label>
+    <input type="text" class="form-control" id="authorName" name="authorName"><br>
+    <label class="form-label" for="customFile">Image</label>
+    <input name="authorImage" type="file" class="form-control" id="customFile" /><br>
+    <input type="submit" value="submit" class="btn btn-outline-success">
+  </form>
+</div>
+  {% if status == "true" %}
+    <div class="toast fade show m-1" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Book Tracker</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Author added
+      </div>
+    </div>
+    {%endif%}
+{% endblock %}

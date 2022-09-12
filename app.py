@@ -74,5 +74,16 @@ def view_quotes():
     quotes = db_operator.get_quotes()
     return render_template("view_quotes.html",quotes=quotes)
 
+@app.route('/add_author',methods=["GET",'POST'])
+def add_author():
+    if request.method == "POST":
+        cover_image = request.files['authorImage']
+        file_name = secure_filename(cover_image.filename)
+        if db_operator.insert_author(request.form['authorName'], file_name):
+            cover_image.save(f"static/media/author/{file_name}")
+            return render_template("add_author.html", status="true")
+    else:
+        return render_template("add_author.html")
+
 if __name__ == "__main__":
     app.run()

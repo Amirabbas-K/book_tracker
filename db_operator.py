@@ -15,6 +15,7 @@ def insert_author(name, picture_path):
     query = f"INSERT INTO author (name,picture_path) VALUES ('{name}','{picture_path}')"
     cursor.execute(query)
     db.commit()
+    return True
 
 
 def insert_book(name, author_id, cover_image, lang, is_translated, pages, pages_read, rate, full_review):
@@ -62,7 +63,7 @@ def delete(table_name, id_number):
 #main_page_fetch
 def main_page():
     query = "select books.name , author.name , books.cover_image , books.lang, books.is_translated , books.pages \
-    , books.pages_read , books.rate, books.full_review ,books.id from books join author where books.author_id = author.id ;"
+    , books.pages_read , books.rate, books.full_review ,books.id from books join author where books.author_id = author.id ORDER BY books.id DESC;"
     cursor.execute(query)
     result = cursor.fetchall()
     return result

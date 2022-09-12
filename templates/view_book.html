@@ -11,7 +11,7 @@
             </div>
             <div class="col-10">
                 <h3 id="bookName">{{book[0]}}</h3>
-                <small id="authorName">{{book[1]}}</small>
+                <small id="authorName"><a href="{{ url_for('view_author',author_id=book[9])}}">{{book[1]}}</a> </small>
                  <p>Language is {{book[3]}} </p>
                 {% if book[4] != 1 %}
                     <p> books is translated </p>
@@ -38,6 +38,5 @@
 
 
 <!-- TODO: Add progress bar -->
-<!-- TODO: make a link related to author -->
 
 {% endblock %}

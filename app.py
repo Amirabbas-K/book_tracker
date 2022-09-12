@@ -74,6 +74,7 @@ def view_quotes():
     quotes = db_operator.get_quotes()
     return render_template("view_quotes.html",quotes=quotes)
 
+
 @app.route('/add_author',methods=["GET",'POST'])
 def add_author():
     if request.method == "POST":
@@ -84,6 +85,16 @@ def add_author():
             return render_template("add_author.html", status="true")
     else:
         return render_template("add_author.html")
+
+@app.route('/view_authors',methods=["GET"])
+def view_authors():
+    authors = db_operator.get_author("author.id")
+    return render_template("view_authors.html" , authors=authors)
+
+@app.route('/view_author/<author_id>',methods=["GET"])
+def view_author(author_id):
+    author = db_operator.get_author_data(author_id)
+    return render_template("view_author.html",author=author)
 
 if __name__ == "__main__":
     app.run()

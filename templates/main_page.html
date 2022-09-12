@@ -13,7 +13,7 @@
             <div class="col-10">
                 <a href="{{ url_for('view_book',book_id=book[9])}}">{{book[0]}}</a>
                 <br>
-                <small>{{book[1]}}</small>
+                <small><a style="color: darkgray" href="{{ url_for('view_author',author_id=book[10])}}">{{book[1]}}</a></small>
                 <br>
                 <span>Rate: {{book[7]}}/10</span>
                 <br>

@@ -1,0 +1,22 @@
+{% extends "basic.html" %}
+{% block title %}View authors{% endblock  %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for author in authors %}
+        <div class="col-3">
+            <div class="card m-1" style="width: 18rem;">
+                <div class="card-body">
+                    <a href="{{ url_for('view_author',author_id=author[0])}}" style="text-decoration: none; color: #181818" class="h4 card-title mb-2">
+                        <img width="100em" height="100em" src="{{url_for('static',filename = 'media/author/')}}{{author[2]}}">
+                        <p class="card-text">{{author[1]}}</p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock  %}

@@ -1,0 +1,23 @@
+{% extends "basic.html" %}
+{% block title %}{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+            <div class="col-2">
+                <img id="bookCover" src="{{url_for('static',filename = 'media/author/')}}{{author[0][2]}}" width="100%" height="100%">
+            </div>
+            <div class="col-10">
+                <h3 id="authorName">{{author[0][1]}}</h3>
+            </div>
+        </div>
+    <div class="row p-3">
+        {% for book in author %}
+            <div class="card m-1" style="width: 18rem;">
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted"> {{ book[3] }}</h6>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

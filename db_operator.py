@@ -36,7 +36,7 @@ def insert_quote(body, book_id, page_from):
 # select
 def book_view(book_id):
     query = f'select books.name , author.name, books.cover_image,books.lang , books.is_translated,books.pages,\
-    books.pages_read,books.rate,books.full_review from books left join author on books.author_id = author.id\
+    books.pages_read,books.rate,books.full_review , author.id from books left join author on books.author_id = author.id\
     where books.id = {book_id}'
     cursor.execute(query)
     result = cursor.fetchall()
@@ -63,7 +63,7 @@ def delete(table_name, id_number):
 #main_page_fetch
 def main_page():
     query = "select books.name , author.name , books.cover_image , books.lang, books.is_translated , books.pages \
-    , books.pages_read , books.rate, books.full_review ,books.id from books join author where books.author_id = author.id ORDER BY books.id DESC;"
+    , books.pages_read , books.rate, books.full_review ,books.id , author.id from books join author where books.author_id = author.id ORDER BY books.id DESC;"
     cursor.execute(query)
     result = cursor.fetchall()
     return result
@@ -77,6 +77,19 @@ def get_quote(book_id):
 
 def get_quotes():
     query = f"SELECT quotes.book_id, quotes.body, books.name FROM quotes join books where books.id = quotes.book_id order by book_id;"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result
+
+def get_author(id):
+    query = f"SELECT * FROM author where id={id}"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result
+
+def get_author_data(id):
+    query = f"SELECT author.id , author.name , author.picture_path , books.name FROM\
+     author  JOIN books WHERE books.author_id = author.id and author.id = {id} "
     cursor.execute(query)
     result = cursor.fetchall()
     return result

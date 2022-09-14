@@ -54,11 +54,12 @@ def edit_book(book_id):
 
 
 # TODO: complete search function
-@app.route('/search',methods=["POST"])
+@app.route('/search',methods=["POST","GET"])
 def search():
     if request.method == "POST":
-        search = request.form['searched']
-        return render_template("search.html" , search = search)
+        searched = request.form['searched']
+        result = db_operator.search(searched)
+        return render_template("main_page.html", books=result)
     else:
         return redirect(url_for('main_page'))
 

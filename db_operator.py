@@ -93,3 +93,10 @@ def get_author_data(id):
     cursor.execute(query)
     result = cursor.fetchall()
     return result
+
+def search(text):
+    query = f'''select books.name , author.name , books.cover_image , books.lang, books.is_translated , books.pages \
+    , books.pages_read , books.rate, books.full_review ,books.id , author.id from books join author where books.author_id = author.id AND books.name like "%{text}%" ORDER BY books.id DESC '''
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return result

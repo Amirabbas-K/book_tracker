@@ -5,16 +5,23 @@
         <label for="bookName">Book name:</label>
         <input class="form-control" type="text" name="bookName" id="bookName" required value="{{book[0]}}">
         <br>
-        <!-- TODO: Make the author reserve by name !-->
-        <label for="authorName">Author id:</label>
-        <input class="form-control" type="number" min="0" name="authorName" id="authorName" required value="{{book[1]}}">
+        <select required name="authorName" id="authorName" class="form-select" aria-label="Default select example">
+          <option disabled>Choose the author</option>
+            {% for author in authors %}
+                {% if author[0] == book[9] %}
+                 <option selected value="{{author[0]}}">{{author[1]}}</option>
+                {% else %}
+                    <option value="{{author[0]}}">{{author[1]}}</option>
+                {% endif %}
+            {% endfor  %}
+        </select>
         <br>
-            <input class="form-file-input" type="file" id="coverImage" name="CoverImage" value="{{book[2]}}" >
-            <label class="form-file-label" for="coverImage">Select book cover</label>
+            <label class="form-label" for="customFile">Image</label>
+            <input name="CoverImage" type="file" class="form-control" id="customFile" />
         <br>
-        <!-- TODO: Make the auto check by name !-->
+        {% if book[3] == "Fa" %}
         <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="lang" id="langFa" value="Fa">
+            <input class="form-check-input" checked type="radio" name="lang" id="langFa" value="Fa">
             <label class="form-check-label" for="langFa">Persian</label>
         </div>
         <div class="form-check-inline">
@@ -22,15 +29,37 @@
             <label class="form-check-label" for="langEn">English</label>
             <br>
         </div>
-        <br>
+        {% else  %}
+            <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="lang" id="langFa" value="Fa">
+            <label class="form-check-label" for="langFa">Persian</label>
+        </div>
         <div class="form-check-inline">
-            <input class="form-check-input" type="radio" name="isTranslated" id="isTranslated1" value="0">
+            <input class="form-check-input"  checked type="radio" id="langEn" name="lang" value="En">
+            <label class="form-check-label" for="langEn">English</label>
+            <br>
+        </div>
+        {% endif %}
+        <br>
+        {% if book[4] == 0 %}
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="isTranslated" checked id="isTranslated1" value="0">
             <label class="form-check-label" for="isTranslated1">Not translated</label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" id="isTranslated2" name="isTranslated" value="1">
             <label class="form-check-label" for="isTranslated2">Translated</label>
         </div>
+        {% else %}
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" name="isTranslated" id="isTranslated1" value="0">
+            <label class="form-check-label" for="isTranslated1">Not translated</label>
+        </div>
+        <div class="form-check-inline">
+            <input class="form-check-input" checked type="radio" id="isTranslated2" name="isTranslated" value="1">
+            <label class="form-check-label" for="isTranslated2">Translated</label>
+        </div>
+        {% endif %}
         <br>
 
         <label for="pages">Pages:</label>

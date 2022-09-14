@@ -4,12 +4,15 @@
         <label for="bookName">Book name:</label>
         <input class="form-control" type="text" name="bookName" id="bookName" required >
         <br>
-        <!-- TODO: Make the author reserve by name !-->
-        <label for="authorName">Author id:</label>
-        <input class="form-control" type="number" min="0" name="authorName" id="authorName" required >
+        <select name="authorName" id="authorName" class="form-select" aria-label="Default select example">
+          <option selected disabled>Choose the author</option>
+            {% for author in authors %}
+                <option value="{{author[0]}}">{{author[1]}}</option>
+            {% endfor  %}
+        </select>
         <br>
-            <input class="form-file-input" type="file" id="coverImage" name="CoverImage"  >
-            <label class="form-file-label" for="coverImage">Select book cover</label>
+            <label class="form-label" for="customFile">Image</label>
+            <input name="CoverImage" type="file" class="form-control" id="customFile" />
         <br>
         <!-- TODO: Make the auto check by name !-->
         <div class="form-check-inline">

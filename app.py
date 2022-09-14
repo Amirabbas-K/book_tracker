@@ -15,6 +15,7 @@ def main_page():
 
 @app.route("/add_book", methods=['GET', 'POST'])
 def add_book():
+    authors = db_operator.get_author("author.id")
     if request.method == "POST":
         cover_image = request.files['CoverImage']
         file_name = secure_filename(cover_image.filename)
@@ -22,9 +23,9 @@ def add_book():
             request.form['lang'], request.form['isTranslated'], request.form['pages'], request.form['pagesRead'],
              request.form['rate'], request.form['fullReview'])):
             cover_image.save(f"static/media/book_cover/{file_name}")
-            return render_template("add_book.html", status="true")
+            return render_template("add_book.html", status="true", authors=authors)
     else:
-        return render_template("add_book.html")
+        return render_template("add_book.html", authors=authors)
 
 
 @app.route('/view_book/<book_id>', methods=['GET'])
@@ -36,6 +37,7 @@ def view_book(book_id):
 
 @app.route('/edit_book/<book_id>', methods=["GET", "POST"])
 def edit_book(book_id):
+    authors = db_operator.get_author("author.id")
     book_data = db_operator.book_view(book_id)[0]
     if request.method == "POST":
         if path.isfile(f"static/media/book_cover/{book_data[2]}"):
@@ -48,7 +50,7 @@ def edit_book(book_id):
             cover_image.save(f"static/media/book_cover/{file_name}")
             return redirect(url_for('view_book',book_id=book_id))
     else:
-        return render_template("edit_post.html", book=book_data)
+        return render_template("edit_post.html", book=book_data, authors=authors)
 
 
 # TODO: complete search function
